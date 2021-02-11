@@ -18,6 +18,11 @@ const CaptureVideo = props => {
             </Fade>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <video muted className="d-block" width="100%" autoPlay />
+          </Col>
+        </Row>
       </Container>
     </Jumbotron>
   )
