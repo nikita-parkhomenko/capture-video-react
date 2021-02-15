@@ -10,7 +10,8 @@ const CaptureVideo = props => {
   const toggle = () => setFadeIn(!fadeIn);
 
   useEffect(() => {
-    dispatch({ type: TYPE_CAPTURE_VIDEO.INITIALIZE, payload: { initialized: true }});
+    console.log('useEffect dispatch initialize action');
+    dispatch({ type: TYPE_CAPTURE_VIDEO.INITIALIZE });
 
     return () => dispatch({ type: TYPE_CAPTURE_VIDEO.CLEAR });
   }, []);

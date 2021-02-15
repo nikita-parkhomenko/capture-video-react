@@ -7,5 +7,7 @@ export default function* watcher() {
 }
 
 function* initializeSaga() {
-  yield put({ type: TYPE_CAPTURE_VIDEO.META, payload: { initialized: true } });
+  console.log('initialized true');
+  yield put({ type: TYPE_CAPTURE_VIDEO.META, initialized: true });
+  console.log('done')
 }

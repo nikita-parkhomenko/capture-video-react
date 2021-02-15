@@ -4,7 +4,7 @@ export const TYPE_CAPTURE_VIDEO = (prefix => ({
   CLEAR: `${prefix}CLEAR`,
   // complex actions
   INITIALIZE: `${prefix}INITIALIZE`,
-}))('@app');
+}))('@app/');
 
 
 const initial = {
@@ -13,15 +13,15 @@ const initial = {
   hasError: false,
 }
 
-export default function(state = initial, action) {
+export default function reducer(state = initial, action) {
   const { type, ...payload } = action;
+  console.log(payload);
+  console.log(state);
   switch (type) {
     case TYPE_CAPTURE_VIDEO.META:
-      state = { ...state, ...payload };
-      break;
+      return { ...state, ...payload };
     case TYPE_CAPTURE_VIDEO.CLEAR:
-      state = initial;
-      break;
+      return initial;
     default:
       return state;
   }
