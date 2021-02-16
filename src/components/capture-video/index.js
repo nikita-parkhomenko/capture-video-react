@@ -1,6 +1,6 @@
 import { Jumbotron, Container, Row, Col, Button, Fade, Spinner } from 'reactstrap';
-import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 
 import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
 
