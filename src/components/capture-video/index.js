@@ -1,20 +1,27 @@
+import { Jumbotron, Container, Row, Col, Button, Fade, Spinner } from 'reactstrap';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Jumbotron, Container, Row, Col, Button, Fade } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { TYPE_CAPTURE_VIDEO } from './reducer';
+import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
 
 const CaptureVideo = props => {
   const dispatch = useDispatch();
   const [fadeIn, setFadeIn] = useState(false);
+  const { disabled } = useSelector(selector);
   const toggle = () => setFadeIn(!fadeIn);
 
   useEffect(() => {
-    console.log('useEffect dispatch initialize action');
     dispatch({ type: TYPE_CAPTURE_VIDEO.INITIALIZE });
 
     return () => dispatch({ type: TYPE_CAPTURE_VIDEO.CLEAR });
   }, []);
+
+  console.log(disabled);
+  if (disabled) {
+    return <div className="d-flex justify-content-center my-5">
+      <Spinner style={{ width: '80px', height: '80px' }} type="grow" color="info" />
+    </div>;
+  }
 
   return (
     <Jumbotron fluid>

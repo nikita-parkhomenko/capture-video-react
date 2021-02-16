@@ -15,8 +15,6 @@ const initial = {
 
 export default function reducer(state = initial, action) {
   const { type, ...payload } = action;
-  console.log(payload);
-  console.log(state);
   switch (type) {
     case TYPE_CAPTURE_VIDEO.META:
       return { ...state, ...payload };
@@ -26,3 +24,5 @@ export default function reducer(state = initial, action) {
       return state;
   }
 }
+
+export const selector = state => state.captureVideo;

@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, delay } from 'redux-saga/effects';
 
 import { TYPE_CAPTURE_VIDEO } from './reducer';
 
@@ -7,7 +7,7 @@ export default function* watcher() {
 }
 
 function* initializeSaga() {
-  console.log('initialized true');
-  yield put({ type: TYPE_CAPTURE_VIDEO.META, initialized: true });
-  console.log('done')
+  yield put({ type: TYPE_CAPTURE_VIDEO.META, disabled: true });
+  yield delay(1000 * 2);
+  yield put({ type: TYPE_CAPTURE_VIDEO.META, initialized: true, disabled: false });
 }
