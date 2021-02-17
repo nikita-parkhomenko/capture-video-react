@@ -1,5 +1,7 @@
 import { Jumbotron, Container, Row, Col, Button, Fade, Spinner } from 'reactstrap';
 import React, { useState, useEffect, useCallback } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
@@ -7,7 +9,7 @@ import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
 const CaptureVideo = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const dispatch = useDispatch();
-  const { disabled } = useSelector(selector);
+  const { disabled, isRecording } = useSelector(selector);
   const toggle = () => setFadeIn(!fadeIn);
   /**
     Коллбэк-реф передаем функцмю в качестве ref атрибута, эта функция получит
@@ -28,7 +30,6 @@ const CaptureVideo = () => {
     return () => dispatch({ type: TYPE_CAPTURE_VIDEO.CLEAR });
   }, [dispatch]);
 
-  console.log(disabled);
   if (disabled) {
     return <div className="d-flex justify-content-center my-5">
       <Spinner style={{ width: '80px', height: '80px' }} type="grow" color="info" />
@@ -36,9 +37,9 @@ const CaptureVideo = () => {
   }
 
   return (
-    <Jumbotron fluid>
+    <Jumbotron fluid className="pt-5">
       <Container className="d-flex flex-column align-items-center" fluid>
-        <h5 className="display-3"> Capture video </h5>
+        <h3> Capture video </h3>
         <p className="lead"> Capture video and audio using MediaRecorder </p>
         <Row>
           <Col className="text-center" >
@@ -49,8 +50,32 @@ const CaptureVideo = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <video ref={setVideoRef} muted className="d-block" width="100%" autoPlay />
+          <Col className="d-flex flex-column align-items-center">
+            <video
+                ref={setVideoRef}
+                muted
+                className="d-block h-50 mb-4"
+                width="100%"
+                autoPlay
+            />
+            <div>
+              {
+                isRecording
+                  ? <FontAwesomeIcon style={{ cursor: 'pointer' }} size="4x" icon={faPause} color="tomato" />
+                  : <FontAwesomeIcon style={{ cursor: 'pointer' }} size="4x" icon={faPlay} color="tomato" />
+              }
+              {
+                isRecording
+                    ? <FontAwesomeIcon
+                        style={{ cursor: 'pointer' }}
+                        className="ml-5"
+                        size="4x"
+                        icon={faStop}
+                        color="tomato"
+                    />
+                    : null
+              }
+            </div>
           </Col>
         </Row>
       </Container>

@@ -5,10 +5,12 @@ export const TYPE_CAPTURE_VIDEO = (prefix => ({
   // complex actions
   INITIALIZE: `${prefix}INITIALIZE`,
   SET_MEDIA_REF: `${prefix}SET_MEDIA_REF`,
+  START_RECORDING: `${prefix}START_RECORDING`,
 }))('@capture-video/');
 
 
 const initial = {
+  isRecording: false,
   initialized: false,
   disabled: false,
   hasError: false,
