@@ -4,7 +4,8 @@ export const TYPE_CAPTURE_VIDEO = (prefix => ({
   CLEAR: `${prefix}CLEAR`,
   // complex actions
   INITIALIZE: `${prefix}INITIALIZE`,
-}))('@app/');
+  SET_MEDIA_REF: `${prefix}SET_MEDIA_REF`,
+}))('@capture-video/');
 
 
 const initial = {
