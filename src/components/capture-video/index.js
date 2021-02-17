@@ -1,20 +1,32 @@
 import { Jumbotron, Container, Row, Col, Button, Fade, Spinner } from 'reactstrap';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
 
 import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
 
-const CaptureVideo = props => {
-  const dispatch = useDispatch();
+const CaptureVideo = () => {
   const [fadeIn, setFadeIn] = useState(false);
+  const dispatch = useDispatch();
   const { disabled } = useSelector(selector);
   const toggle = () => setFadeIn(!fadeIn);
+  /**
+    Коллбэк-реф передаем функцмю в качестве ref атрибута, эта функция получит
+    DOM element в качестве аргумента, который я перенаправлю в сагу
+   */
+  const setVideoRef = useCallback(videoRef => {
+    console.log(videoRef);
+
+    videoRef && dispatch({
+      type: TYPE_CAPTURE_VIDEO.SET_MEDIA_REF,
+      payload: { videoRef }
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch({ type: TYPE_CAPTURE_VIDEO.INITIALIZE });
 
     return () => dispatch({ type: TYPE_CAPTURE_VIDEO.CLEAR });
-  }, []);
+  }, [dispatch]);
 
   console.log(disabled);
   if (disabled) {
@@ -38,7 +50,7 @@ const CaptureVideo = props => {
         </Row>
         <Row>
           <Col>
-            <video muted className="d-block" width="100%" autoPlay />
+            <video ref={setVideoRef} muted className="d-block" width="100%" autoPlay />
           </Col>
         </Row>
       </Container>
