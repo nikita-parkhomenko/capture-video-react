@@ -1,7 +1,7 @@
 import { Jumbotron, Container, Row, Col, Button, Fade, Spinner } from 'reactstrap';
+import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TYPE_CAPTURE_VIDEO, selector } from './reducer';
